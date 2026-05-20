@@ -3,5 +3,15 @@
   "curve": "bls12-381",
   "power": 16,
   "circuits": ["insert", "withdraw"],
-  "contributions": []
+  "contributions": [
+    {
+      "stage": "phase1",
+      "slot": 0,
+      "name": "initial",
+      "timestamp": "2026-05-20T15:42:44Z",
+      "ptau": "phase1/pot_0000_initial.ptau",
+      "ptau_hash": "sha256:528ee96e5cec968a2e98704a9c0aae32c92fd81b434d3ef7df8b20ed1419d550",
+      "attestation": null
+    }
+  ]
 }
