@@ -1,0 +1,63 @@
+name: Verify contribution PR
+
+on:
+  pull_request:
+    paths:
+      - "transcript/contributions.json"
+      - "phase1/**"
+      - "phase2/**"
+      - "contributors/**"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions: {}
+
+jobs:
+  verify:
+    name: Verify head of contribution chain
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version: "22"
+
+      - name: Install snarkjs
+        run: npm install -g snarkjs@0.7.6
+
+      - name: Validate transcript schema
+        run: node scripts/validate-contributions.js
+
+      - name: Verify head (hash, cryptographic check, chain length)
+        run: ./scripts/verify-previous.sh
+
+      - name: Attestation presence
+        run: |
+          set -euo pipefail
+          NAME=$(jq -r '.contributions[-1].name // "none"' transcript/contributions.json)
+          STAGE=$(jq -r '.contributions[-1].stage // "none"' transcript/contributions.json)
+          ATT=$(jq -r '.contributions[-1].attestation // "null"' transcript/contributions.json)
+          if [ "$NAME" = "initial" ] || [ "$NAME" = "drand-beacon" ]; then
+              echo "Head is '$NAME'; no attestation required."
+              exit 0
+          fi
+          if [ "$ATT" = "null" ] || [ ! -f "$ATT" ]; then
+              echo "::error::Missing attestation for $STAGE head '$NAME': $ATT"
+              exit 1
+          fi
+          if ! grep -q "BEGIN PGP SIGNED MESSAGE" "$ATT" 2>/dev/null; then
+              echo "::warning::$ATT is not GPG-clearsigned; a GitHub-verified commit is then required."
+          fi
+          echo "Attestation present: $ATT"

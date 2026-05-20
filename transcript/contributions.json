@@ -1,0 +1,7 @@
+{
+  "ceremony": "ZKResistor trusted setup",
+  "curve": "bls12-381",
+  "power": 16,
+  "circuits": ["insert", "withdraw"],
+  "contributions": []
+}

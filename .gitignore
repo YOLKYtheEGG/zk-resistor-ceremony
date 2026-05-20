@@ -1,0 +1,8 @@
+# Working directory: regenerated pot_final.ptau and exported VK JSON.
+# Not part of the committed contribution chain.
+build/
+
+node_modules/
+.DS_Store
+*.log
+.env
