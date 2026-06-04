@@ -205,6 +205,16 @@
       "ptau_hash": "sha256:68d1d6ff443c7f223680ff862e33badf1db22020e8b49c8820815f11ad76e8be",
       "attestation": "contributors/whicencer.attestation.md",
       "repo_commit": "uncommitted"
+    },
+    {
+      "stage": "phase1",
+      "slot": 20,
+      "name": "NowItsOurTurn",
+      "timestamp": "2026-06-04T17:49:58Z",
+      "ptau": "phase1/pot_0020_NowItsOurTurn.ptau",
+      "ptau_hash": "sha256:fc082b1a5a48b36c7e0a05bd5b1cc962a365dcd32c57e523bd4e40c86b769daf",
+      "attestation": "contributors/NowItsOurTurn.attestation.md",
+      "repo_commit": "c234b9e258e2aa294936ee866efe0f1df2de2307"
     }
   ]
 }
