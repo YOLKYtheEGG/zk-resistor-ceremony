@@ -235,6 +235,16 @@
       "ptau_hash": "sha256:f8438ea847475f5f016ed171434916d535dcf429a4ffedac88e76b67f4f7df33",
       "attestation": "contributors/inozemtsev-roman.attestation.md",
       "repo_commit": "b85d02b1835b70b00b55be2b01f0e26f3f5f0ea3"
+    },
+    {
+      "stage": "phase1",
+      "slot": 23,
+      "name": "the-gateway-ton",
+      "timestamp": "2026-06-20T03:19:32Z",
+      "ptau": "phase1/pot_0023_the-gateway-ton.ptau",
+      "ptau_hash": "sha256:8b20614a1cd7424343c112c37416a1f157f6cb63d2164b1c9eed0848a0facfa4",
+      "attestation": "contributors/the-gateway-ton.attestation.md",
+      "repo_commit": "ed9539031a68312b1624644a0beda4da3459e4b3"
     }
   ]
 }
